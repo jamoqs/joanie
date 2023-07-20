@@ -534,6 +534,7 @@ class AddressAdmin(admin.ModelAdmin):
         "country",
         "is_main",
         "owner",
+        "vat_id"
     )
     list_filter = [RequiredOwnerFilter, "is_main"]
     list_select_related = ["owner"]

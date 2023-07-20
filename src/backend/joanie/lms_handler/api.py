@@ -3,6 +3,8 @@ API endpoints
 """
 import hashlib
 import hmac
+import json
+import os
 
 from django.conf import settings
 
@@ -99,3 +101,13 @@ def course_runs_sync(request):
         models.CourseRun.objects.create(**serializer.validated_data, course=course)
 
     return Response({"success": True})
+
+
+@api_view(["GET"])
+def complementary_configurations(request):
+    """This View is used to retrieve complementary configurations for the LMS handler."""
+    configurations = {}
+    configurations['paymentAddressForm'] = json.loads(os.environ.get('PAYMENT_ADDRESS_FORM', '{}'))
+    configurations['country'] = os.environ.get('PAYMENT_FORM_ADDRESS_DEFAULT_COUNTRY', 'FR')
+    configurations['currency'] = os.environ.get('PAYMENT_CURRENCY', 'EUR')
+    return Response(configurations, status=200)

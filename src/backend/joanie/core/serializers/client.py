@@ -51,6 +51,7 @@ class AddressSerializer(serializers.ModelSerializer):
             "is_main",
             "postcode",
             "title",
+            "vat_id",
         ]
         read_only_fields = [
             "id",

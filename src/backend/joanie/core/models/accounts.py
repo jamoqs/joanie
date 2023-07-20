@@ -107,6 +107,9 @@ class Address(BaseModel):
         on_delete=models.CASCADE,
     )
     is_main = models.BooleanField(_("main"), default=False)
+    vat_id = models.CharField(
+        verbose_name=_("vat identification"), max_length=50, blank=True, null=True
+    )
 
     class Meta:
         db_table = "joanie_address"
